@@ -68,6 +68,11 @@
     <div class="container">
         <div class="row my-3">
             <div class="col-sm-6 offset-sm-3">
+              {% if messages %}
+              {% for message in messages %}
+               <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5"{% endif %}>{{message}}</p>
+              {% endfor %}
+              {% endif %}
           <h3 style="color:#12258f;text-align: center;border-bottom: 1px solid gray;">Certificate Form</h3>
           <hr>
           <form action="" method="post" novalidate class="shadow p-5">

@@ -96,17 +96,21 @@ def logouthandle(request):
 @login_required(login_url='/')
 def certificate_output(request):
     # data = Enrollment.objects.filter(user=request.user)
-    data = CertificateRequest.objects.filter(user = request.user)
-    if data[0].status == 'pending':
-        return HttpResponse('certificate on process')
-    
-    if data[0].status == 'approved':
-       return render(request,'regex_certificate.html',{'data':data})
-    
-    if data[0].status == 'denied':
-        return HttpResponse('Your certificate process deninded')
+    data = CertificateRequest.objects.filter(user = request.user,status = 'approved')
+    print('this is my data>>>>',data)
+    # for i in data:
+    #     print(i.status)
+    for i in data:
+        if i.status == 'pending':
+            return HttpResponse('certificate on process')
+        
+        if i.status == 'approved':
+            return render(request,'regex_certificate.html',{'data':data})
+        
+        if i.status == 'denied':
+            return HttpResponse('Your certificate process deninded')
 
-    print(data[0].status)
+        # print(data[0].status)
 
 @login_required(login_url='/')
 def certificateform(request):
@@ -117,10 +121,16 @@ def certificateform(request):
             course = form.cleaned_data['certification']
             enrollment_date = form.cleaned_data['enrollment_date']
             completion_date = form.cleaned_data['completion_date']
-            Enrollment(user=user,certification=course,enrollment_date=enrollment_date,completion_date =completion_date).save()
-            print(user,course,enrollment_date,completion_date)
-            data = Enrollment.objects.filter(user=request.user)
-            return redirect(f'/certificate_request/{data[0].id}/')
+            
+            if Enrollment.objects.filter(user=user,certification=course).first():
+                messages.success(request,'This user and this ceritficate alraedy registered')
+            
+            else:
+
+                Enrollment(user=user,certification=course,enrollment_date=enrollment_date,completion_date =completion_date).save()
+                print(user,course,enrollment_date,completion_date)
+                data = Enrollment.objects.filter(user=request.user,certification=course)
+                return redirect(f'/certificate_request/{data[0].id}/')
 
 
     form = certificate_form()
