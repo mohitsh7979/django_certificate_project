@@ -24,4 +24,7 @@ class CertificateRequest(models.Model):
     status = models.CharField(max_length=20, choices=[("pending", "Pending"), ("approved", "Approved"), ("denied", "Denied")], default="pending")
     issuing_date = models.DateField(null=True,blank=True)
     issuing_authority = models.CharField(max_length=100)
+ 
+
+
   

@@ -25,5 +25,6 @@ urlpatterns = [
     path('form/',views.certificateform),
     path('create-account/',views.Create_Account),
     path('certificate_request/<int:id>/',views.certificate_request),
-    path('logout/',views.logouthandle)
+    path('logout/',views.logouthandle),
+ 
 ]

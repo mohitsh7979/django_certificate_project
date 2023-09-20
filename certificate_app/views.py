@@ -96,21 +96,14 @@ def logouthandle(request):
 @login_required(login_url='/')
 def certificate_output(request):
     # data = Enrollment.objects.filter(user=request.user)
-    data = CertificateRequest.objects.filter(user = request.user,status = 'approved')
-    print('this is my data>>>>',data)
-    # for i in data:
-    #     print(i.status)
-    for i in data:
-        if i.status == 'pending':
-            return HttpResponse('certificate on process')
-        
-        if i.status == 'approved':
-            return render(request,'regex_certificate.html',{'data':data})
-        
-        if i.status == 'denied':
-            return HttpResponse('Your certificate process deninded')
+    if CertificateRequest.objects.filter(user = request.user,status = 'approved'): 
+        data = CertificateRequest.objects.filter(user = request.user,status = 'approved')
+        return render(request,'regex_certificate.html',{'data':data})
+    else:
+        return HttpResponse('certificate on process')
 
-        # print(data[0].status)
+        
+
 
 @login_required(login_url='/')
 def certificateform(request):
@@ -161,15 +154,6 @@ def certificate_request(request,id):
     return redirect('/certificate/')
 
 
-
-# def download_certificate(request, certificate_id):
-#     certificate = get_object_or_404(CertificateRequest, pk=certificate_id)
-#     certificate_file_path = certificate.file.path  # Replace with the actual file path
-#     response = FileResponse(open(certificate_file_path, 'rb'))
-#     response['Content-Type'] = 'application/pdf'  # Set the appropriate content type
-#     response['Content-Disposition'] = f'attachment; filename="{certificate.title}.pdf"'
-
-#     return response
 
 
 
