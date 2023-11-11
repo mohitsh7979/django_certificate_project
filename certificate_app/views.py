@@ -5,6 +5,10 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.template import loader
+# import pdfkit
+import io
 # from django.http import FileResponse
 # from django.shortcuts import get_object_or_404
 # from .models import CertificateRequest
@@ -94,13 +98,31 @@ def logouthandle(request):
 
 
 @login_required(login_url='/')
-def certificate_output(request):
-    # data = Enrollment.objects.filter(user=request.user)
-    if CertificateRequest.objects.filter(user = request.user,status = 'approved'): 
-        data = CertificateRequest.objects.filter(user = request.user,status = 'approved')
-        return render(request,'regex_certificate.html',{'data':data})
-    else:
+def certificate_output(request,id):
+    data = CertificateRequest.objects.filter(id=id)
+    print(data[0].status)
+
+    if data[0].status == 'pending':
         return HttpResponse('certificate on process')
+    
+    if data[0].status == 'approved':
+        return render(request,'regex_certificate.html',{'data':data})
+    
+    else:
+        return HttpResponse('your certificate process denied ')
+    # if CertificateRequest.objects.filter(id=id,status = 'approved'): 
+    #     data = CertificateRequest.objects.filter(user = request.user,status = 'approved')
+
+
+    #     return render(request,'regex_certificate.html',{'data':data})
+    # else:
+    #     return HttpResponse('certificate on process')
+    
+
+@login_required(login_url='/')
+def certificate_link(request):
+    data = CertificateRequest.objects.filter(user=request.user)
+    return render(request,'certificate_links.html',{'data':data})
 
         
 
@@ -151,7 +173,7 @@ def certificate_request(request,id):
 
     CertificateRequest(user=data[0].user,certification = data[0].certification,enrollment=data[0],status = 'pending',issuing_authority = d).save()
 
-    return redirect('/certificate/')
+    return redirect('/certificate_link/')
 
 
 

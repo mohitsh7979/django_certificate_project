@@ -21,10 +21,12 @@ from certificate_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.login_handle),
-    path('certificate/',views.certificate_output),
+    path('certificate_output/<int:id>/',views.certificate_output),
     path('form/',views.certificateform),
     path('create-account/',views.Create_Account),
     path('certificate_request/<int:id>/',views.certificate_request),
+    path('certificate_link/',views.certificate_link),
     path('logout/',views.logouthandle),
+
  
 ]

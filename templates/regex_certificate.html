@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
@@ -36,8 +37,8 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            min-width: 500px;
-            max-width: 1500px;
+            min-width: 900px;
+            
            
 
         }
@@ -45,7 +46,7 @@
         .name{
 
             position: relative;
-            bottom: 6.8rem;
+            bottom: 7rem;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
         }
@@ -80,7 +81,7 @@
             left:1rem;
         }
 
-
+{% comment %} 
         @media  (min-width:1400px) and (max-width:1600px){
 
             .name{
@@ -114,7 +115,210 @@
             }
 
 
+        } {% endcomment %}
+
+
+        {% comment %} @media (max-width:375px){
+
+            .name{
+
+                position: relative;
+                bottom: 15.3rem;
+                font-size: 12px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+            }
+    
+            .date{
+    
+                position: relative;
+                bottom: 13.2rem;
+                left: 1rem;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 10px;
+                
+            }
+    
+            .coursename{
+                position: relative; 
+                bottom: 12.5rem;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 10px;
+            }
+    
+            .issued-date{
+    
+                position: relative;
+                top: -8rem;
+                right:7rem;
+                font-size: 14px;
+            }
+
+            .certificate_id{
+
+                position: relative;
+                top:-3.5rem;
+                left:1.5rem;
+                font-size: 12px;
+            }
+
+
+        } {% endcomment %}
+
+
+        {% comment %} @media (min-width:375px) and (max-width:425px){
+
+            .name{
+
+                position: relative;
+                bottom: 15.3rem;
+                font-size: 12px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+            }
+    
+            .date{
+    
+                position: relative;
+                bottom: 13.2rem;
+                left: 0.5rem;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 10px;
+                
+            }
+    
+            .coursename{
+                position: relative; 
+                bottom: 12.5rem;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 10px;
+            }
+    
+            .issued-date{
+    
+                position: relative;
+                top: -8rem;
+                right:7rem;
+                font-size: 14px;
+            }
+
+            .certificate_id{
+
+                position: relative;
+                top:-3.5rem;
+                left:1.5rem;
+                font-size: 12px;
+            }
+
+
+        } {% endcomment %}
+
+{% comment %} 
+        @media (min-width:426px) and (max-width:768px){
+
+            .name{
+
+                position: relative;
+                bottom: 15rem;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+            }
+    
+            .date{
+    
+                position: relative;
+                bottom: 12.4rem;
+                left: 1.6rem;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 13px;
+                
+            }
+    
+            .coursename{
+                position: relative; 
+                bottom: 11.5rem;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 14px;
+            }
+    
+            .issued-date{
+    
+                position: relative;
+                top: -6.8rem;
+                right:7.5rem;
+                font-size: 14px;
+            }
+
+            .certificate_id{
+
+                position: relative;
+                top:-2.4rem;
+                left:1.3rem;
+                font-size: 12px;
+            }
+
+
         }
+
+        @media (min-width:769px) and (max-width:1024px){
+
+            .name{
+
+                position: relative;
+                bottom: 12rem;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+            }
+    
+            .date{
+    
+                position: relative;
+                bottom: 8.5rem;
+                left: 0.2rem;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 13px;
+                
+            }
+    
+            .coursename{
+                position: relative; 
+                bottom: 8rem;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 14px;
+            }
+    
+            .issued-date{
+    
+                position: relative;
+                top: -0.8rem;
+                right:8rem;
+                font-size: 14px;
+            }
+
+            .certificate_id{
+
+                position: relative;
+                top:-2.4rem;
+                left:1.3rem;
+                font-size: 12px;
+            }
+
+
+        } {% endcomment %}
+
+        #downloadButton {
+            display: block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+          }
+          
+          #downloadButton:hover {
+            background-color: #0056b3;
+          }
+          
     </style>
 </head>
 <body>
@@ -149,9 +353,22 @@
     {% comment %} <a href="{% url 'download_certificate' i.id %}" class="btn btn-primary">Download Certificate</a> {% endcomment %}
     {% endfor %}
 
-
-
-
-    
+    {% comment %} <a id="downloadButton" href="#" download="your_page.html">Download Page</a> {% endcomment %}
+     
+    <script>
+        function downloadPage() {
+          var htmlContent = document.documentElement.outerHTML; // Get the HTML content of the entire page
+          var blob = new Blob([htmlContent], { type: 'text/html' }); // Create a Blob with the HTML content
+          var url = URL.createObjectURL(blob); // Create a URL for the Blob
+      
+          // Set the download link's href to the Blob URL
+          var downloadLink = document.getElementById('downloadButton');
+          downloadLink.href = url;
+        }
+      
+        // Attach the downloadPage function to the button's click event
+        document.getElementById('downloadButton').addEventListener('click', downloadPage);
+    </script>
+      
 </body>
 </html>

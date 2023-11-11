@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block certificate_link %}
+
+
+<div class="container border border-dark p-3">
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        {% comment %} <th scope="col">#</th> {% endcomment %}
+        <th scope="col">Certificate Name</th>
+        {% comment %} <th scope="col">Last</th>
+        <th scope="col">Handle</th> {% endcomment %}
+      </tr>
+    </thead>
+    <tbody>
+      
+     {% for i in data %}
+      <tr>
+        {% comment %} <th scope="row">1</th> {% endcomment %}
+        <td><a href="/certificate_output/{{i.id}}/">{{i}}</a></td>
+        {% comment %} <td>Otto</td>
+        <td>@mdo</td> {% endcomment %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+{% endblock certificate_link %}

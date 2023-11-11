@@ -34,8 +34,6 @@ class certificate_form(forms.ModelForm):
         fields = ['certification','enrollment_date','completion_date']
         widgets = {
 
-            'certification':forms.Select(attrs={'class':'form-control'}),
-            'enrollment_date':forms.DateInput(attrs={'class':'form-control picker'}),
-            'completion_date':forms.DateInput(attrs={'class':'form-control picker'})
+            'certification':forms.Select(attrs={'class':'form-control'})
         
         }
